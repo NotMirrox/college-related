@@ -1,0 +1,13 @@
+{
+	"name": "college-related",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"scripts": {
+		"build": "tsc",
+		"watch": "tsc --watch"
+	},
+	"devDependencies": {
+		"typescript": "^5.7.3"
+	}
+}
