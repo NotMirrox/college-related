@@ -1,5 +1,12 @@
 {
-	"[python]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	}
+	"files.eol": "\n",
+	"typescript.tsdk": "node_modules/typescript/lib",
+
+	"editor.codeActionsOnSave": [
+		"source.organizeImports",
+		"source.fixAll",
+		"source.addMissingImports"
+	],
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "biomejs.biome"
 }
