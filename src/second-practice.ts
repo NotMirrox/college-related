@@ -1,5 +1,5 @@
 export class Node<T> {
-	public adjacent: Node<T>[]
+	public adjacent: Node<T>[] = []
 
 	constructor(public data: T) {}
 
@@ -10,7 +10,6 @@ export class Node<T> {
 	public removeAdjacent(data: T) {
 		const index = this.adjacent.findIndex((node) => node.data === data)
 		if (index === -1) return
-
 		return this.adjacent.splice(index, 1)[0]
 	}
 }
@@ -47,9 +46,7 @@ export class Graph<T> {
 
 	public removeEdge(source: T, destination: T) {
 		const sourceNode = this.nodes.get(source)
-		const destinationNode = this.nodes.get(destination)
-
-		if (!sourceNode || !destinationNode) return
+		if (!sourceNode) return
 		sourceNode.removeAdjacent(destination)
 	}
 
@@ -58,9 +55,12 @@ export class Graph<T> {
 		const path: T[] = []
 
 		function visit(node: Node<T>) {
-			visited.add(node)
-			if (node === end) return true
+			if (node === end) {
+				path.push(node.data)
+				return true
+			}
 
+			visited.add(node)
 			for (const adjacent of node.adjacent) {
 				if (visited.has(adjacent) || !visit(adjacent)) continue
 				path.push(node.data)
@@ -70,8 +70,7 @@ export class Graph<T> {
 			return false
 		}
 
-		visit(start)
-		return path
+		return visit(start) ? path.reverse() : []
 	}
 
 	public topologicalSort() {
